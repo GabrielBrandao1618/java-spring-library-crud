@@ -7,6 +7,5 @@ import java.util.UUID;
 import com.gabriel.library.domain.entities.Book;
 
 @Repository
-public interface BooksRepository extends JpaRepository<Book, UUID>{
-
+public interface BooksRepository extends JpaRepository<Book, UUID> {
 }
