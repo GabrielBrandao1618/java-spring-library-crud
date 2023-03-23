@@ -3,31 +3,34 @@ package com.gabriel.library.domain.entities;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.persistence.Id;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-@Entity
+@Entity(name = "Book")
+@Table(name = "book")
 public class Book {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
   public UUID id;
   public String title;
-  public UUID authorId;
+  @ManyToOne
+  @JoinColumn(name = "author_id")
+  private Author author;
 
   public Book() {}
 
-  public Book(String title, UUID authorId) {
+  public Book(String title, Author author) {
+    this.author = author;
     this.id = UUID.randomUUID();
     this.title = title;
-    this.authorId = authorId;
   }
 
   public UUID getId() {
     return this.id;
   }
   public UUID getAuthorId() {
-    return this.authorId;
+    return this.author.getId();
   }
   public String getTitle() {
     return this.title;
